@@ -7,26 +7,22 @@
 #include<arpa/inet.h>
 
 void main() {
-	int s, n, sock;
-	struct sockaddr_in client, server;
-	char buf1[10] = "", buf2[10] = "Hello" ;
-	s = socket(AF_INET, SOCK_STREAM, 0);
+	struct sockaddr_in server, client;
+	int s, n;
+	char b1[10], b2[10];
+	s = socket(AF_INET, SOCK_DGRAM, 0);
 	server.sin_family = AF_INET;
 	server.sin_port = 2000;
 	server.sin_addr.s_addr = inet_addr("127.0.0.1");
-
-	connect(s, (struct sockaddr *)&server, sizeof(server));
-
-	for(;;) {
+	n = sizeof(server);
+	while(1) {
 		printf("\nclient: ");
-		scanf("%s",buf2);
-		send(s, buf2, sizeof(buf2), 0);
-		if(strcmp(buf2, "end") == 0)
+		scanf("%s",b2);
+		sendto(s, b2, sizeof(b2), 0, (struct sockaddr * ) &server, n);
+		if(!strcmp(b2, "end"))
 			break;
-		recv(s, buf1, sizeof(buf1), 0);
-		if(strcmp(buf1, "end") == 0) 
-			break;
-		printf("\nserver: %s", buf1);
+		recvfrom(s,b1,sizeof(b1),0,NULL,NULL);
+		printf("\nserver:%s\n",b1);
 	}
-	close(s);
 }
+
