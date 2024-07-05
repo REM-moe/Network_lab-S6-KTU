@@ -24,6 +24,7 @@ int main() {
         recvfrom(sockt, buf1, sizeof(buf1), 0, (struct sockaddr*)&client, &client_size);
         printf("\nclient: %s", buf1);
 
+        printf("\n server: ");
         scanf("%s", buf1);
 
         sendto(sockt, buf1, sizeof(buf1), 0, (struct sockaddr*) &client, &client_size);
