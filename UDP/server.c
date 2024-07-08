@@ -21,12 +21,14 @@ int main() {
 
     while(1) {
 
-        recvfrom(sockt, buf1, sizeof(buf1), 0, (struct sockaddr*)&client, &client_size);
+        //recvfrom(sockt, buf1, sizeof(buf1), 0, (struct sockaddr*)&client, &client_size);
+        recv(sockt, buf1, sizeof(buf1), 0);
         printf("\nclient: %s", buf1);
 
         printf("\n server: ");
         scanf("%s", buf1);
 
-        sendto(sockt, buf1, sizeof(buf1), 0, (struct sockaddr*) &client, &client_size);
+        //sendto(sockt, buf1, sizeof(buf1), 0, (struct sockaddr*) &client, &client_size);
+        send(sockt, buf1, sizeof(buf1), 0);
     }
 }

@@ -23,7 +23,7 @@ int main() {
 
         sendto(sockt, buf1, sizeof(buf1), 0, (struct sockaddr*)&server, size_server);
 
-        recvfrom(sockt, buf1, sizeof(buf1), 0, (struct sockaddr*)&server, size_server);
+        recvfrom(sockt, buf1, sizeof(buf1), 0, (struct sockaddr*)&server, &size_server);
 
         printf("\n server: %s", buf1);
 
